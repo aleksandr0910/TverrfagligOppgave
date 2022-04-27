@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-
+//Alle requirements, rammeverks funksjoner som jeg har installert
 const express = require("express");
 const app = express();
 const bcrypt = require("bcrypt");
@@ -16,6 +16,8 @@ const mongoose = require('mongoose');
 
 const passportLocalMongoose = require("passport-local-mongoose");
 
+
+
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
@@ -26,10 +28,11 @@ app.use(
     saveUninitialized:false
   })
 );
-
+//passport initialisering og session for å 
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Mongoose for å snakke og kommunisere med mongoDB serveren og sette den opp med koden
 mongoose.connect('mongodb://localhost:27017/test'); 
 
 const userSchema = new mongoose.Schema ({
@@ -43,6 +46,9 @@ userSchema.plugin(passportLocalMongoose, {usernameField:"email"})
 
 const User = mongoose.model('user', userSchema);
 
+//Lagd en autentiserings funksjon som går gjennom email og passord
+//Skjekker om brukeren finnes eller om passordet er feil 
+//Bcrypt sammenligner passordet med det lagrede hash passordet
 const authenticateUser = async (email, password, done) => {
   const user = await User.findOne({email})
   if (user == null) {
@@ -61,7 +67,6 @@ const authenticateUser = async (email, password, done) => {
 };
 
 passport.use(User.createStrategy());
-
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -73,12 +78,14 @@ app.get("/", function (req, res) {
   res.render("index");
 });
 
+//Sender feilmelding om logg inn er feil
 app.get("/login", function (req, res) {
   res.render("login", {
       message:req.session.messages
   });
 });
-
+//Vurderer om passord er feil og om den isåfall skal sende feilmelding
+//Er det riktig sendes man til hovedside
 app.post(
   "/login",
   passport.authenticate("local", {
@@ -91,12 +98,16 @@ app.post(
 app.get("/register", function (req, res) {
   res.render("register");
 });
-app.get("")
+
+
+
+//Registrerings funksjon som registrerer dataen som fylles ut og lagrer det i databasen for at brukere skal kunne logge på
+//Tar dataen fra email og passord å krever det for å logge inn
 app.post("/register", async (req, res) => {
   User.register(new User({email:req.body.email}), req.body.password , function(err,User){
     if(err){console.log(err); res.redirect("/register")}
     else{
-      //A new user was saved
+    
       console.log(User + "2");
       passport.authenticate("local")(req,res,function(){
         res.redirect("/login")

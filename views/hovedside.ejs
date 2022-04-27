@@ -14,7 +14,8 @@
         <%- include("partials/nav") -%>
         <div class="container-md">
             <h1 id="hsOverskrift">Om Passport</h1>
-            <p> Passport er et autentiseringsrammeverk for node.js. Med Passport kan du lage og registrere brukere 
+            <br>
+            <p> Passport er et cookie basert autentiseringsrammeverk for node.js. Med Passport kan du lage og registrere brukere 
                 og administrere dem og deres rettigheter
             </p>
             <p> Med passport følger mange metoder som kan brukes med javascript</p>
@@ -69,17 +70,33 @@ passport.deserializeUser(User.deserializeUser());
                   </div>
                 </div>
             <h1>Hvorfor passport</h1>
-            <p>Passport er bra fordi det har gode og enkle metoder.
-                 Mye av arbeidet er gjort på forhånd og du trenger bare å implementere koden metodene der du vil ha dem</p>
-                 <p>Passport er et rammeverk med </p>
+            <br>
+            <p>Fordelen med Passport er dens intuitive og enkle metoder.
+                 Mye av arbeidet er gjort på forhånd og det er fleksibelt med node/express sammen med andre applikasjoner og kode</p>
+                 <p>Passport er bra for små prosjekter som krever autentisering, som denne oppgaven<br>
+                    Siden Passport er gratis og veldig fleksibelt er det en god løsning for små prosjekter/bedrifter       
+                 </p>
+                 <p>Passport er et rammeverk med innebygd API
+                    
+                 </p>
+                 <p class="underoverskrift">Hvorfor ikke passport</p>
+                 <p> Passport er lagd for å autentisere via cookies og ikke for å sikre brukere, med andre funksjoner som bcrypt og mongoDB
+                     kan man gjøre det trygt
+                     Men om man f eks lagrer autentisering i en array noe passport gir deg muligheten til kan du lett støtte på problemer utenfor å kunne bli hacket lett også
+                 </p>
         </div>
+        <br>
         <div class="container-md">
             <h1 id="hsOverskrift">Bcrypt og salting/hashing</h1>
-            <div class="container-sm">
-                <p>Bcrypt er en metode for salting og hashing av password. </p> 
-               <div class="row gx-5">
-                   <div class="col">
-
+            <br>
+                <p>Bcrypt er en metode for salting og hashing av password. Med bcrypt kan man sikre passordene sine 
+                    Istedet for et standard passord med ord og bokstaver 
+                    Genererer bcrypt en tilfedlig rekke nummere som et kryptert passord og bruker det til å sammenligne når du logger deg på.
+                 </p> 
+                 <p>Bcrypt er en bra måte å sikre passord selvom databasen din skulle bli hacket</p>
+               
+                   
+                 <p class="underoverskrift">Eksempel på bcrypt brukt i koden min</p>
                 <pre><code class="language-js">
 try {
 
@@ -93,11 +110,8 @@ try {
      } catch (e) {
     return done(e);
     }
-};
-                </code> </pre>
-                </div>
-            </div>
-                <p>Hashe passordet ditt og gjøre det om til et tilfeldig sett med tall og bokstaver</p>
+}; </code> </pre>
+            
             </div>
             
         </div>
