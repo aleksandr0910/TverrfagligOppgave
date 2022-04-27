@@ -6,6 +6,7 @@
     "express": "^4.17.3",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.2",
+    "highlight.js": "^11.5.1",
     "mongoose": "^6.3.1",
     "node": "^17.7.2",
     "passport": "^0.5.2",

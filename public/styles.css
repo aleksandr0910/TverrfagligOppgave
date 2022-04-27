@@ -9,6 +9,10 @@ body{
 h1{
     color:red;
 }
- #maindiv{
-    
+ #fargediv{
+    background-color:rgb(10, 45, 45);
+ }
+
+ #fargetekst{
+     color:white;
  }

@@ -11,7 +11,6 @@ const localStrategy = require("passport-local");
 const dotenv = require("dotenv");
 
 const session = require("express-session");
-const { stringify } = require("querystring");
 
 const mongoose = require('mongoose');
 
@@ -61,12 +60,6 @@ const authenticateUser = async (email, password, done) => {
   }
 };
 
-//passport.use(new localStrategy({ usernameField: "email" }, authenticateUser));
-//passport.serializeUser((user, done) => {
-//done(null, user._id);
-//});
-//passport.deserializeUser((_id, done) => {done(null, User.findOne({_id}))});
-
 passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
@@ -89,7 +82,7 @@ app.get("/login", function (req, res) {
 app.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/hovedside",
     failureRedirect: "/login",
     failureMessage: true
   })
@@ -111,6 +104,10 @@ app.post("/register", async (req, res) => {
     }
   })
 })
-app.listen(3000, function () {
+app.get("/hovedside", (req,res)=> {
+  res.render("hovedside")
+})
+
+app.listen(process.env.PORT || 3000, function () {
   console.log("Port started");
 });
