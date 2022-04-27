@@ -8,6 +8,7 @@ body{
 
 h1{
     color:red;
+   
 }
  #fargediv{
     background-color:rgb(10, 45, 45);
@@ -20,3 +21,8 @@ h1{
  .underoverskrift{
      font-size: 20pt;
  }
+
+p{
+    font-size: 15pt;
+    
+}

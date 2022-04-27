@@ -61,10 +61,10 @@ passport.authenticate("local", {
                       <pre><code class="language-js">
 
 passport.serializeUser(User.serializeUser());
-//Deklarer dataen til brukeren
+//Funksjon for å føre inn bruker data i en session
 
 passport.deserializeUser(User.deserializeUser());
-//
+//Funksjon for å hente data fra brukeren i en session
 
                 </code> </pre>
                   </div>
@@ -81,8 +81,8 @@ passport.deserializeUser(User.deserializeUser());
                  </p>
                  <p class="underoverskrift">Hvorfor ikke passport</p>
                  <p> Passport er lagd for å autentisere via cookies og ikke for å sikre brukere, med andre funksjoner som bcrypt og mongoDB
-                     kan man gjøre det trygt
-                     Men om man f eks lagrer autentisering i en array noe passport gir deg muligheten til kan du lett støtte på problemer utenfor å kunne bli hacket lett også
+                     kan man gjøre det trygt <br>
+                     Men om man f eks lagrer autentisering i en array kan du lett støtte på problemer utenfor det å kunne bli hacket lett også
                  </p>
         </div>
         <br>
@@ -90,8 +90,8 @@ passport.deserializeUser(User.deserializeUser());
             <h1 id="hsOverskrift">Bcrypt og salting/hashing</h1>
             <br>
                 <p>Bcrypt er en metode for salting og hashing av password. Med bcrypt kan man sikre passordene sine 
-                    Istedet for et standard passord med ord og bokstaver 
-                    Genererer bcrypt en tilfedlig rekke nummere som et kryptert passord og bruker det til å sammenligne når du logger deg på.
+                    Istedet for et standard passord med ord og bokstaver <br>
+                    genererer bcrypt en tilfedlig rekke nummere som et kryptert passord og bruker det til å sammenligne når du logger deg på.
                  </p> 
                  <p>Bcrypt er en bra måte å sikre passord selvom databasen din skulle bli hacket</p>
                
@@ -118,7 +118,7 @@ try {
         
             <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
             <script> hljs.initHighlightingOnLoad();</script>
-   
+           
     </body>
    
 </html>
