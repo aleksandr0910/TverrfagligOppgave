@@ -50,14 +50,14 @@ const User = mongoose.model('user', userSchema);
 const authenticateUser = async (email, password, done) => {
   const user = await User.findOne({email})
   if (user == null) {
-    return done(null, false, { message: "no user like that exists" });
+    return done(null, false);
   }
   try {
     console.log(password, user)
     if (await bcrypt.compare(password, user.password)) {
       return done(null, user);
     } else {
-      return done(null, false, { message: "Wrong password" });
+      return done(null, false);
     }
   } catch (e) {
     return done(e);
