@@ -69,14 +69,49 @@ passport.deserializeUser(User.deserializeUser());
                 </code> </pre>
                   </div>
                 </div>
+                <h1>
+                    Passport-local </h1>
+                    <p> Passport-local er stragtegi innenfor passport som lagrer iden til brukeren på en session</p>
+                    <p> Under er et eksempel på bruk av denne strategien i min kode</p>
+                    <div class="row gx-5">
+                    <div class="col">
+                        <pre><code class="language-js">
+const authenticateUser = async (email, password, done) => {
+    const user = await User.findOne({email})
+        if (user == null) {
+             return done(null, false);
+            }
+            try {
+             console.log(password, user)
+                    if (await bcrypt.compare(password, user.password)) {
+                        return done(null, user);
+            } else {
+                         return done(null, false);
+            }
+        } catch (e) {
+                  return done(e);
+             }
+    };
+
+                  </code> </pre>
+                    </div>
+                    <div class="col">
+                    <pre><code class="language-js">                 
+userSchema.plugin(passportLocalMongoose, {usernameField:"email"})     
+
+passport.use(User.createStrategy());
+
+                    </code>
+                </div>
+            </div>
             <h1>Hvorfor passport</h1>
             <br>
             <p>Fordelen med Passport er dens intuitive og enkle metoder.
                  Mye av arbeidet er gjort på forhånd og det er fleksibelt med node/express sammen med andre applikasjoner og kode</p>
                  <p>Passport er bra for små prosjekter som krever autentisering, som denne oppgaven<br>
-                    Siden Passport er gratis og veldig fleksibelt er det en god løsning for små prosjekter/bedrifter       
+                    Også siden Passport er gratis og veldig fleksibelt      
                  </p>
-                
+                <p> Passport er en middelware for node og derfor ikke en service. Fordi du styrer og setter opp serveren selv imotsetning til en service som firebase som er forhåndsbestemt</p>
                  <p class="underoverskrift">Hvorfor ikke passport</p>
                  <p> Passport er lagd for å autentisere via cookies og ikke for å sikre brukere, med andre funksjoner som bcrypt og mongoDB
                      kan man gjøre det trygt <br>
@@ -87,27 +122,19 @@ passport.deserializeUser(User.deserializeUser());
         <div class="container-md">
             <h1 id="hsOverskrift">Bcrypt og salting/hashing</h1>
             <br>
-                <p>Bcrypt er en metode for salting og hashing av password. Med bcrypt kan man sikre passordene sine 
-                    Istedet for et standard passord med ord og bokstaver <br>
-                    genererer bcrypt en tilfedlig rekke nummere som et kryptert passord og bruker det til å sammenligne når du logger deg på.
+                <p>Bcrypt er en metode for salting og hashing av password. Med bcrypt kan man sikre passordene sine
+                    istedet for et standard passord med ord og bokstaver <br>
+                    Bcrypt generer en tilfedlig rekke nummere som et kryptert passord og bruker det til å sammenligne når du logger deg på.
                  </p> 
                  <p>Bcrypt er en bra måte å sikre passord selvom databasen din skulle bli hacket</p>
                
                    
                  <p class="underoverskrift">Eksempel på bcrypt brukt i koden min</p>
                 <pre><code class="language-js">
-try {
 
     if (await bcrypt.compare(password, user.password)) {
         return done(null, user);
-
-            } else {
-            return done(null, false, { message: "Wrong password" });
-            }
-
-     } catch (e) {
-    return done(e);
-    }
+ 
 }; </code> </pre>
             
             </div>
