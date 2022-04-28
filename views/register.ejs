@@ -6,20 +6,29 @@
 </head>
 <div id="maindiv" class="container-md">
 <h1 id="hsOverskrift">Register</h1>
-<form action="/register" method="post">
+<div class="row mb-4">
+    <div class="col d-flex justify-content-center">
+        <form action="/register" method="post">
+    
     <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
+        <label class="form-label"for="name">Name</label>
+        <input class="form-control"type="text" id="name" name="name" required>
     </div>
     <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+        <label class="form-label"for="email">Email</label>
+        <input class="form-control"type="email" id="email" name="email" required>
     </div>
     <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
+        <label class="form-label"for="password">Password</label>
+        <input class="form-control"type="password" id="password" name="password" required>
     </div>
-    <button type="submit">Register</button>
+    <button class="btn btn-primary btn-block mb-4" type="submit">Register</button>
+    <a class="btn btn-primary btn-block mb-4" href="/login">Login</a> 
 </form>
-<a href="/login">Login</a>
+
 </div>
+
+</div>
+</div>
+
+

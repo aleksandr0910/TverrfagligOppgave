@@ -16,8 +16,6 @@ const mongoose = require('mongoose');
 
 const passportLocalMongoose = require("passport-local-mongoose");
 
-
-
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
@@ -28,7 +26,7 @@ app.use(
     saveUninitialized:false
   })
 );
-//passport initialisering og session for å 
+//passport initialisering og session for å  
 app.use(passport.initialize());
 app.use(passport.session());
 
